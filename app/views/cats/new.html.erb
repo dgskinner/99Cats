@@ -1,0 +1,49 @@
+<h1>Create a new cat!</h1>
+
+<% if flash.now[:notice] %>
+  <ul>
+  <% flash.now[:notice].each do |message| %>
+      <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<form action="/cats" method="post">
+  <label for="cat_name">First name</label>
+  <input name="cat[name]" id="cat_name" type="text">
+  <br>
+  <br>
+
+  <label for="cat_color">Coat color</label>
+  <select name="cat[color]" id="cat_color">
+    <option value="" selected>-- Choose color --</option>
+    <% Cat::COLORS.each do |color| %>
+      <option value="<%= color %>"><%= color.capitalize %></option>
+    <% end %>
+  </select>
+  <br>
+  <br>
+  
+  <label for="cat_sex">Sex of the cat</label>
+    <% Cat::SEXES.each do |sex| %>
+      <br>
+      <input id="cat_sex" type="radio" name="cat[sex]" value="<%= sex %>">
+      <%= sex == "F" ? "Female" : "Male"%>
+    <% end %>
+  </select>
+  <br>
+  <br>
+  
+  <label for="cat_birth_date">Birth date</label>
+  <input name="cat[birth_date]" id="cat_birth_date" type="date"></input>
+  <br>
+  <br>
+  
+  <label for="cat_description">Description</label>
+  <textarea name="cat[description]" id="cat_description"></textarea>
+  <br>
+  <br>
+  
+  <input type="submit" value="Build my cat!">
+  
+</form>
