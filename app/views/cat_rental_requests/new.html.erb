@@ -1,0 +1,39 @@
+<h1>Create a new cat rental request!</h1>
+
+<% if flash.now[:notice] %>
+  <ul>
+  <% flash.now[:notice].each do |message| %>
+      <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<form action="<%= cat_rental_requests_url %>" method="POST">
+  <label for="cat_rental_request_cat_id">Select a cat</label>
+  <select name="cat_rental_request[cat_id]" id="cat_rental_request_cat_id">
+    <option>-- Choose a cat --</option>
+    <% @cats.each do |cat| %>
+      <option value="<%= cat.id %>"
+        <%= "selected='selected'" if cat.id == @cat_rental_request.cat_id %>>
+        <%= cat.name %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+  <br>
+  
+  <label for="cat_rental_request_start_date">Start Date</label>
+  <input name="cat_rental_request[start_date]" id="cat_rental_request_start_date" type="date" value="<%= @cat_rental_request.start_date %>"></input>
+  
+  <label for="cat_rental_request_end_date">End Date</label>
+  <input name="cat_rental_request[end_date]" id="cat_rental_request_end_date" type="date" value="<%= @cat_rental_request.end_date %>"></input>
+  <br>
+  <br>
+  
+  <input type="submit" value="Make the request">
+  
+</form>
+
+<br>
+<%= link_to "Home", cats_url %>
+  
